@@ -2,11 +2,14 @@
 ```
 ansible-playbook -i inventory.ini extract_playbook.ansible.yml
 ```
+- Tags - `nrf` | `udr` | `udm` | `amf` | `ausf` | `smf` | `upf` | `pcf` | `bsf` | `nssf` | `gnb` | `ue` | `bird` | `upf-core` | `upf-baf`
+
+
 ## MongoDB Only
 ```
 ansible-playbook -i inventory.ini extract_playbook.ansible.yml --tags "db"
 ```
-- Possible Tags `db` | `export` | `download` | `clear`
+- Tags - `db` | `export` | `download` | `clear`
 
 # Upload
 ```
