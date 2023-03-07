@@ -1,5 +1,89 @@
 ---
 # Extract MongoDB
+- name: MongoDB
+  host: bt-baf-5g-core_5g-db
+  gather_facts: false
+  tasks:
+    - name: Export MongoDB Accounts
+      ansible.builtin.shell: mongoexport --collection=accounts --db=open5gs --out=~/accounts.json
+      tags: 
+        - db
+        - export
+    - name: Download MongoDB Accounts
+      ansible.builtin.fetch:
+        src: ~/accounts.json
+        dest: database/accounts.json
+      tags: 
+        - db
+        - download
+    - name: Clear Account Export
+      ansible.builtin.file:
+        path: ~/accounts.json
+        state: absent
+      tags: 
+        - db
+        - clear
+
+    - name: Export MongoDB Profiles
+      ansible.builtin.shell: mongoexport --collection=profiles --db=open5gs --out=~/profiles.json
+      tags: 
+        - db
+        - export
+        - profiles
+    - name: Download MongoDB Profiles
+      ansible.builtin.fetch:
+        src: ~/profiles.json
+        dest: database/profiles.json
+      tags: 
+        - db
+        - download
+    - name: Clear Profile Export
+      ansible.builtin.file:
+        path: ~/profiles.json
+        state: absent
+      tags: 
+        - db
+        - clear
+                
+    - name: Export MongoDB Sessions
+      ansible.builtin.shell: mongoexport --collection=sessions --db=open5gs --out=~/sessions.json
+      tags: 
+        - db
+        - export
+    - name: Download MongoDB Sessions
+      ansible.builtin.fetch:
+        src: ~/sessions.json
+        dest: database/sessions.json
+      tags: 
+        - db
+        - download
+    - name: Clear Sessions Export
+      ansible.builtin.file:
+        path: ~/sessions.json
+        state: absent
+      tags: 
+        - db
+        - clear
+                
+    - name: Export MongoDB Subscribers
+      ansible.builtin.shell: mongoexport --collection=subscribers --db=open5gs --out=~/subscribers.json
+      tags: 
+        - db
+        - export
+    - name: Download MongoDB Subscribers
+      ansible.builtin.fetch:
+        src: ~/subscribers.json
+        dest: database/subscribers.json
+      tags: 
+        - db
+        - download
+    - name: Clear Subscribers Export
+      ansible.builtin.file:
+        path: ~/subscribers.json
+        state: absent
+      tags: 
+        - db
+        - clear
 
 - name: AMF
   hosts: bt_baf_5g_core_5g-amf
