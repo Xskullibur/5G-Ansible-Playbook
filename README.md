@@ -22,6 +22,6 @@ ansible-playbook -i inventory.ini restart_service_playbook.ansible.yml
 ```
 
 # TODO:
-## Add to inventory
+Add to inventory
 - `bt-baf-ran_5g-gnb-baf ansible_host=100.97.6.40 os=ubuntu_22_04_desktop ansible_user=bt-user ansible_password=Admin1Admin1`
 - `bt-beg-ran_5g-gnb-beg ansible_host=100.96.6.10 os=ubuntu_22_04_desktop ansible_user=bt-user ansible_password=Admin1Admin1`
