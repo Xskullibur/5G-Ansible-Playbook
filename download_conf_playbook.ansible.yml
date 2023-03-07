@@ -1,5 +1,4 @@
 ---
-# Extract bird conf
 # Extract MongoDB
 
 - name: AMF
@@ -10,7 +9,7 @@
       ansible.builtin.fetch:
         src: /etc/open5gs/amf.yaml
         dest: nfconfig/amf-{{ inventory_hostname }}.yaml
-        flat: yes
+        flat: true
 
 - name: NRF
   hosts: bt_baf_5g_core_5g-nrf
@@ -20,7 +19,7 @@
       ansible.builtin.fetch:
         src: /etc/open5gs/nrf.yaml
         dest: nfconfig/nrf-{{ inventory_hostname }}.yaml
-        flat: yes
+        flat: true
 
 - name: PCF
   hosts: bt_baf_5g_core_5g-pcf
@@ -30,7 +29,7 @@
       ansible.builtin.fetch:
         src: /etc/open5gs/pcf.yaml
         dest: nfconfig/pcf-{{ inventory_hostname }}.yaml
-        flat: yes
+        flat: true
 
 - name: UDR
   hosts: bt_baf_5g_core_5g-udr
@@ -40,7 +39,7 @@
       ansible.builtin.fetch:
         src: /etc/open5gs/udr.yaml
         dest: nfconfig/udr-{{ inventory_hostname }}.yaml
-        flat: yes
+        flat: true
 
 - name: UDM
   hosts: bt_baf_5g_core_5g-udm
@@ -50,7 +49,7 @@
       ansible.builtin.fetch:
         src: /etc/open5gs/udm.yaml
         dest: nfconfig/udm-{{ inventory_hostname }}.yaml
-        flat: yes
+        flat: true
 
 - name: NSSF
   hosts: bt_baf_5g_core_5g-nssf
@@ -60,7 +59,7 @@
       ansible.builtin.fetch:
         src: /etc/open5gs/nssf.yaml
         dest: nfconfig/nssf-{{ inventory_hostname }}.yaml
-        flat: yes
+        flat: true
 
 - name: AUSF
   hosts: bt_baf_5g_core_5g-ausf
@@ -70,7 +69,7 @@
       ansible.builtin.fetch:
         src: /etc/open5gs/ausf.yaml
         dest: nfconfig/ausf-{{ inventory_hostname }}.yaml
-        flat: yes
+        flat: true
 
 - name: BSF
   hosts: bt_baf_5g_core_5g-bsf
@@ -80,7 +79,7 @@
       ansible.builtin.fetch:
         src: /etc/open5gs/bsf.yaml
         dest: nfconfig/bsf-{{ inventory_hostname }}.yaml
-        flat: yes
+        flat: true
 
 - name: SMF
   hosts: bt_baf_5g_core_5g-smf
@@ -90,7 +89,12 @@
       ansible.builtin.fetch:
         src: /etc/open5gs/smf.yaml
         dest: nfconfig/smf-{{ inventory_hostname }}.yaml
-        flat: yes
+        flat: true
+    - name: Extract Bird Config File
+      ansible.builtin.fetch:
+        src: /etc/bird/bird.conf
+        dest: birdconf/bird-{{ inventory_hostname }}.conf
+        flat: true
 
 - name: UPF-CORE
   hosts: bt_baf_5g_core_5g-upf-core
@@ -100,7 +104,12 @@
       ansible.builtin.fetch:
         src: /etc/open5gs/upf.yaml
         dest: nfconfig/upf-{{ inventory_hostname }}.yaml
-        flat: yes
+        flat: true
+    - name: Extract Bird Config File
+      ansible.builtin.fetch:
+        src: /etc/bird/bird.conf
+        dest: birdconf/bird-{{ inventory_hostname }}.conf
+        flat: true
 
 - name: UPF BAF
   hosts: bt_baf_5g_core_5g-upf-baf
@@ -110,9 +119,9 @@
       ansible.builtin.fetch:
         src: /etc/open5gs/upf.yaml
         dest: nfconfig/upf-{{ inventory_hostname }}.yaml
-        flat: yes
+        flat: true
 
-- name: gNB
+- name: Extract gNB
   hosts: bt-baf-ran_5g-gnb-baf,bt-beg-ran_5g-gnb-beg
   gather_facts: false
   tasks:
@@ -120,7 +129,7 @@
       ansible.builtin.fetch:
         src: /opt/UERANSIM/config/open5gs-gnb.yaml
         dest: gnbconfig/open5gs-gnb-{{ inventory_hostname }}.yaml
-        flat: yes
+        flat: true
 
 - name: UE
   hosts: bt-baf-ran_5g-ue-baf_01,bt-baf-ran_5g-ue-baf_02,bt-baf-ran_5g-ue-baf_03
@@ -130,4 +139,4 @@
       ansible.builtin.fetch:
         src: /opt/UERANSIM/config/open5gs-ue.yaml
         dest: ueconfig/open5gs-ue-{{ inventory_hostname }}.yaml
-        flat: yes
+        flat: true
