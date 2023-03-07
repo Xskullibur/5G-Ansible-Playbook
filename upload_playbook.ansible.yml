@@ -1,166 +1,156 @@
 ---
-- name: aljsdlas
-  hosts: bt-baf-5g-core_5g-amf,bt-baf-5g-core_5g-ausf
-  remote_user: open5g
+- name: NRF
+  hosts: bt_baf_5g_core_5g-nrf
   gather_facts: false
   become: true
-  become_method: sudo
-  tasks: 
-    - name: Extract Config File
+  tasks:
+    - name: Upload Config File
+      ansible.builtin.copy:
+        src: nfconfig/amf-{{ inventory_hostname }}.yaml
+        dest: /etc/open5gs/nrf.yaml
+    - name: Restart Service
+      ansible.builtin.shell: systemctl restart open5gs-nrfd
+
+- name: UDR
+  hosts: bt_baf_5g_core_5g-udr
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Upload Config File
+      ansible.builtin.copy:
+        src: nfconfig/udr-{{ inventory_hostname }}.yaml
+        dest: /etc/open5gs/udr.yaml
+    - name: Restart Service
+      ansible.builtin.shell: systemctl restart open5gs-udrd
+
+- name: UDM
+  hosts: bt_baf_5g_core_5g-udm
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Upload Config File
+      ansible.builtin.copy:
+        src: nfconfig/udm-{{ inventory_hostname }}.yaml
+        dest: /etc/open5gs/udm.yaml
+    - name: Restart Service
+      ansible.builtin.shell: systemctl restart open5gs-udmd
+
+- name: AMF
+  hosts: bt_baf_5g_core_5g-amf
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Upload Config File
       ansible.builtin.copy:
         src: nfconfig/amf-{{ inventory_hostname }}.yaml
         dest: /etc/open5gs/amf.yaml
+    - name: Restart Service
+      ansible.builtin.shell: systemctl restart open5gs-amfd
 
-# - name: NRF
-#   hosts: bt_baf_5g_core_5g-nrf
-#   remote_user: open5g
-#   gather_facts: false
-#   become: true
-#   become_method: sudo
-#   tasks:
-#     - name: Upload Config File
-#       ansible.builtin.copy:
-#         dest: /etc/open5gs/nrf.yaml
-#         src: nfconfig/nrf.yaml
-#     - name: Restart Service
-#       ansible.builtin.shell: systemctl restart open5gs-nrfd
+- name: AUSF
+  hosts: bt_baf_5g_core_5g-ausf
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Upload Config File
+      ansible.builtin.copy:
+        src: nfconfig/ausf-{{ inventory_hostname }}.yaml
+        dest: /etc/open5gs/ausf.yaml
+    - name: Restart Service
+      ansible.builtin.shell: systemctl restart open5gs-ausfd
 
-# - name: UDR
-#   hosts: bt_baf_5g_core_5g-udr
-#   remote_user: open5g
-#   gather_facts: false
-#   become: true
-#   become_method: sudo
-#   tasks:
-#     - name: Upload Config File
-#       ansible.builtin.copy:
-#         dest: /etc/open5gs/udr.yaml
-#         src: nfconfig/udr.yaml
-#     - name: Restart Service
-#       ansible.builtin.shell: systemctl restart open5gs-udrd
+- name: SMF
+  hosts: bt_baf_5g_core_5g-smf
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Upload Config File
+      ansible.builtin.copy:
+        src: nfconfig/smf-{{ inventory_hostname }}.yaml
+        dest: /etc/open5gs/smf.yaml
+    - name: Restart Service
+      ansible.builtin.shell: systemctl restart open5gs-smfd
 
-# - name: UDM
-#   hosts: bt_baf_5g_core_5g-udm
-#   remote_user: open5g
-#   gather_facts: false
-#   become: true
-#   become_method: sudo
-#   tasks:
-#     - name: Upload Config File
-#       ansible.builtin.copy:
-#         dest: /etc/open5gs/udm.yaml
-#         src: nfconfig/udm.yaml
-#     - name: Restart Service
-#       ansible.builtin.shell: systemctl restart open5gs-udmd
+- name: UPF-CORE
+  hosts: bt_baf_5g_core_5g-upf-core
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Upload Config File
+      ansible.builtin.copy:
+        src: nfconfig/upf-{{ inventory_hostname }}.yaml
+        dest: /etc/open5gs/upf.yaml
+    - name: Restart Service
+      ansible.builtin.shell: systemctl restart open5gs-upfd
 
-# - name: AMF
-#   hosts: bt_baf_5g_core_5g-amf
-#   remote_user: open5g
-#   gather_facts: false
-#   become: true
-#   become_method: sudo
-#   tasks:
-#     - name: Upload Config File
-#       ansible.builtin.copy:
-#         dest: /etc/open5gs/amf.yaml
-#         src: nfconfig/amf.yaml
-#     - name: Restart Service
-#       ansible.builtin.shell: systemctl restart open5gs-amfd
+- name: UPF BAF
+  hosts: bt_baf_5g_core_5g-upf-baf
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Upload Config File
+      ansible.builtin.copy:
+        src: nfconfig/upf-{{ inventory_hostname }}.yaml
+        dest: /etc/open5gs/upf.yaml
+    - name: Restart Service
+      ansible.builtin.shell: systemctl restart open5gs-upfd
 
-# - name: AUSF
-#   hosts: bt_baf_5g_core_5g-ausf
-#   remote_user: open5g
-#   gather_facts: false
-#   become: true
-#   become_method: sudo
-#   tasks:
-#     - name: Upload Config File
-#       ansible.builtin.copy:
-#         dest: /etc/open5gs/ausf.yaml
-#         src: nfconfig/ausf.yaml
-#     - name: Restart Service
-#       ansible.builtin.shell: systemctl restart open5gs-ausfd
+- name: PCF
+  hosts: bt_baf_5g_core_5g-pcf
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Upload Config File
+      ansible.builtin.copy:
+        dest: /etc/open5gs/pcf.yaml
+        src: nfconfig/pcf-{{ inventory_hostname }}.yaml
+    - name: Restart Service
+      ansible.builtin.shell: systemctl restart open5gs-pcfd
 
-# - name: SMF
-#   hosts: bt_baf_5g_core_5g-smf
-#   remote_user: open5g
-#   gather_facts: false
-#   become: true
-#   become_method: sudo
-#   tasks:
-#     - name: Upload Config File
-#       ansible.builtin.copy:
-#         dest: /etc/open5gs/smf.yaml
-#         src: nfconfig/smf.yaml
-#     - name: Restart Service
-#       ansible.builtin.shell: systemctl restart open5gs-smfd
+- name: BSF
+  hosts: bt_baf_5g_core_5g-bsf
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Upload Config File
+      ansible.builtin.copy:
+        src: nfconfig/bsf-{{ inventory_hostname }}.yaml
+        dest: /etc/open5gs/bsf.yaml
+    - name: Restart Service
+      ansible.builtin.shell: systemctl restart open5gs-bsfd
 
-# - name: UPF-CORE
-#   hosts: bt_baf_5g_core_5g-upf-core
-#   remote_user: open5g
-#   gather_facts: false
-#   become: true
-#   become_method: sudo
-#   tasks:
-#     - name: Upload Config File
-#       ansible.builtin.copy:
-#         dest: /etc/open5gs/upf.yaml
-#         src: nfconfig/upf.yaml
-#     - name: Restart Service
-#       ansible.builtin.shell: systemctl restart open5gs-upfd
+- name: NSSF
+  hosts: bt_baf_5g_core_5g-nssf
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Upload Config File
+      ansible.builtin.copy:
+        src: nfconfig/nssf-{{ inventory_hostname }}.yaml
+        dest: /etc/open5gs/nssf.yaml
+    - name: Restart Service
+      ansible.builtin.shell: systemctl restart open5gs-nssfd
 
-# - name: UPF BAF
-#   hosts: bt_baf_5g_core_5g-upf-baf
-#   remote_user: open5g
-#   gather_facts: false
-#   become: true
-#   become_method: sudo
-#   tasks:
-#     - name: Upload Config File
-#       ansible.builtin.copy:
-#         dest: /etc/open5gs/upf.yaml
-#         src: nfconfig/upf.yaml
-#     - name: Restart Service
-#       ansible.builtin.shell: systemctl restart open5gs-upfd
+- name: gNB
+  hosts: bt-baf-ran_5g-gnb-baf,bt-beg-ran_5g-gnb-beg
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Upload Config File
+      ansible.builtin.copy:
+        src: gnbconfig/open5gs-gnb-{{ inventory_hostname }}.yaml
+        dest: /opt/UERANSIM/config/open5gs-gnb.yaml
+    - name: Restart Service
+      ansible.builtin.shell: systemctl restart nr-gnb
 
-# - name: PCF
-#   hosts: bt_baf_5g_core_5g-pcf
-#   remote_user: open5g
-#   gather_facts: false
-#   become: true
-#   become_method: sudo
-#   tasks:
-#     - name: Upload Config File
-#       ansible.builtin.copy:
-#         dest: /etc/open5gs/pcf.yaml
-#         src: nfconfig/pcf.yaml
-#     - name: Restart Service
-#       ansible.builtin.shell: systemctl restart open5gs-pcfd
-
-# - name: BSF
-#   hosts: bt_baf_5g_core_5g-bsf
-#   remote_user: open5g
-#   gather_facts: false
-#   become: true
-#   become_method: sudo
-#   tasks:
-#     - name: Upload Config File
-#       ansible.builtin.copy:
-#         dest: /etc/open5gs/bsf.yaml
-#         src: nfconfig/bsf.yaml
-#     - name: Restart Service
-#       ansible.builtin.shell: systemctl restart open5gs-bsfd
-
-# - name: NSSF
-#   hosts: bt_baf_5g_core_5g-nssf
-#   remote_user: open5g
-#   gather_facts: false
-#   become: true
-#   become_method: sudo
-#   tasks:
-#     - name: Upload Config File
-#       ansible.builtin.copy:
-#         dest: /etc/open5gs/nssf.yaml
-#         src: nfconfig/nssf.yaml
-#     - name: Restart Service
-#       ansible.builtin.shell: systemctl restart open5gs-nssfd.
+- name: UE
+  hosts: bt-baf-ran_5g-ue-baf_01,bt-baf-ran_5g-ue-baf_02,bt-baf-ran_5g-ue-baf_03
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Upload Config File
+      ansible.builtin.copy:
+        src: ueconfig/open5gs-ue-{{ inventory_hostname }}.yaml
+        dest: /opt/UERANSIM/config/open5gs-ue.yaml
+    - name: Restart Service
+      ansible.builtin.shell: systemctl restart nr-ue
