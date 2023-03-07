@@ -1,14 +1,17 @@
 ---
 - name: aljsdlas
-  hosts: bt-baf-5g-core_5g-amf
+  hosts: bt-baf-5g-core_5g-amf,bt-baf-5g-core_5g-ausf
   remote_user: open5g
   gather_facts: false
   tasks: 
     - name: Extract Config File
       ansible.builtin.fetch:
         src: /etc/open5gs/amf.yaml
-        dest: nfconfig/amf-{{ ansible_name }}.yaml
+        dest: nfconfig/amf-{{ inventory_hostname }}.yaml
         flat: yes
+
+# Extract bird conf
+# Extract MongoDB
 
 # - name: AMF
 #   hosts: bt_baf_5g_core_5g-amf
