@@ -1,5 +1,5 @@
 [Unit]
-Description=Open5GS SGW-C Daemon
+Description=Open5GS SMF Daemon
 After=network-online.target
 
 [Service]
@@ -9,7 +9,7 @@ User=open5gs
 Group=open5gs
 
 Restart=always
-ExecStart=@bindir@/open5gs-sgwcd -c @sysconfdir@/open5gs/sgwc.yaml
+ExecStart=/home/open5g/open5gs/install/bin/open5gs-smfd -c /home/open5g/open5gs/install/etc/open5gs/smf.yaml
 RestartSec=2
 RestartPreventExitStatus=1
 ExecReload=/bin/kill -HUP $MAINPID

@@ -1,5 +1,5 @@
 [Unit]
-Description=Open5GS AUSF Daemon
+Description=Open5GS SGW-C Daemon
 After=network-online.target
 
 [Service]
@@ -9,7 +9,7 @@ User=open5gs
 Group=open5gs
 
 Restart=always
-ExecStart=@bindir@/open5gs-ausfd -c @sysconfdir@/open5gs/ausf.yaml
+ExecStart=/home/open5g/open5gs/install/bin/open5gs-sgwcd -c /home/open5g/open5gs/install/etc/open5gs/sgwc.yaml
 RestartSec=2
 RestartPreventExitStatus=1
 ExecReload=/bin/kill -HUP $MAINPID

@@ -1,6 +1,6 @@
 [Unit]
-Description=Open5GS HSS Daemon
-Wants=mongodb.service mongod.service
+Description=Open5GS AUSF Daemon
+After=network-online.target
 
 [Service]
 Type=simple
@@ -9,7 +9,7 @@ User=open5gs
 Group=open5gs
 
 Restart=always
-ExecStart=@bindir@/open5gs-hssd -c @sysconfdir@/open5gs/hss.yaml
+ExecStart=/home/open5g/open5gs/install/bin/open5gs-ausfd -c /home/open5g/open5gs/install/etc/open5gs/ausf.yaml
 RestartSec=2
 RestartPreventExitStatus=1
 ExecReload=/bin/kill -HUP $MAINPID
