@@ -1,0 +1,132 @@
+---
+- name: aljsdlas
+  hosts: bt-baf-5g-core_5g-amf
+  remote_user: open5g
+  gather_facts: false
+  tasks: 
+    - name: Extract Config File
+      ansible.builtin.fetch:
+        src: /etc/open5gs/amf.yaml
+        dest: nfconfig/amf-{{ ansible_name }}.yaml
+        flat: yes
+
+# - name: AMF
+#   hosts: bt_baf_5g_core_5g-amf
+#   remote_user: open5g
+#   gather_facts: false
+#   tasks:
+#     - name: Extract Config File
+#       ansible.builtin.fetch:
+#         src: /etc/open5gs/amf.yaml
+#         dest: nfconfig/amf.yaml
+#         flat: yes
+
+# - name: NRF
+#   hosts: bt_baf_5g_core_5g-nrf
+#   remote_user: open5g
+#   gather_facts: false
+#   tasks:
+#     - name: Extract Config File
+#       ansible.builtin.fetch:
+#         src: /etc/open5gs/nrf.yaml
+#         dest: nfconfig/nrf.yaml
+#         flat: yes
+
+# - name: PCF
+#   hosts: bt_baf_5g_core_5g-pcf
+#   remote_user: open5g
+#   gather_facts: false
+#   tasks:
+#     - name: Extract Config File
+#       ansible.builtin.fetch:
+#         src: /etc/open5gs/pcf.yaml
+#         dest: nfconfig/pcf.yaml
+#         flat: yes
+
+# - name: UDR
+#   hosts: bt_baf_5g_core_5g-udr
+#   remote_user: open5g
+#   gather_facts: false
+#   tasks:
+#     - name: Extract Config File
+#       ansible.builtin.fetch:
+#         src: /etc/open5gs/udr.yaml
+#         dest: nfconfig/udr.yaml
+#         flat: yes
+
+# - name: UDM
+#   hosts: bt_baf_5g_core_5g-udm
+#   remote_user: open5g
+#   gather_facts: false
+#   tasks:
+#     - name: Extract Config File
+#       ansible.builtin.fetch:
+#         src: /etc/open5gs/udm.yaml
+#         dest: nfconfig/udm.yaml
+#         flat: yes
+
+# - name: NSSF
+#   hosts: bt_baf_5g_core_5g-nssf
+#   remote_user: open5g
+#   gather_facts: false
+#   tasks:
+#     - name: Extract Config File
+#       ansible.builtin.fetch:
+#         src: /etc/open5gs/nssf.yaml
+#         dest: nfconfig/nssf.yaml
+#         flat: yes
+
+# - name: AUSF
+#   hosts: bt_baf_5g_core_5g-ausf
+#   remote_user: open5g
+#   gather_facts: false
+#   tasks:
+#     - name: Extract Config File
+#       ansible.builtin.fetch:
+#         src: /etc/open5gs/ausf.yaml
+#         dest: nfconfig/ausf.yaml
+#         flat: yes
+
+# - name: BSF
+#   hosts: bt_baf_5g_core_5g-bsf
+#   remote_user: open5g
+#   gather_facts: false
+#   tasks:
+#     - name: Extract Config File
+#       ansible.builtin.fetch:
+#         src: /etc/open5gs/bsf.yaml
+#         dest: nfconfig/bsf.yaml
+#         flat: yes
+
+# - name: SMF
+#   hosts: bt_baf_5g_core_5g-smf
+#   remote_user: open5g
+#   gather_facts: false
+#   tasks:
+#     - name: Extract Config File
+#       ansible.builtin.fetch:
+#         src: /etc/open5gs/smf.yaml
+#         dest: nfconfig/smf.yaml
+#         flat: yes
+
+# - name: UPF-CORE
+#   hosts: bt_baf_5g_core_5g-upf-core
+#   remote_user: open5g
+#   gather_facts: false
+#   tasks:
+#     - name: Extract Config File
+#       ansible.builtin.fetch:
+#         src: /etc/open5gs/upf.yaml
+#         dest: nfconfig/upf.yaml
+#         flat: yes
+
+# - name: UPF BAF
+#   hosts: bt_baf_5g_core_5g-upf-baf
+#   remote_user: open5g
+#   gather_facts: false
+#   tasks:
+#     - name: Extract Config File
+#       ansible.builtin.fetch:
+#         src: /etc/open5gs/upf.yaml
+#         dest: nfconfig/upf.yaml
+#         flat: yes
