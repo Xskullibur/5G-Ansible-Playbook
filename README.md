@@ -2,7 +2,7 @@
 ```
 ansible-playbook -i inventory.ini extract_playbook.ansible.yml
 ```
-- Tags - `nrf` | `udr` | `udm` | `amf` | `ausf` | `smf` | `upf` | `pcf` | `bsf` | `nssf` | `gnb` | `ue` | `bird` | `upf-core` | `upf-baf`
+- Tags - \<network-functions\> | `gnb` | `ue` | `bird` | `upf-core` | `upf-baf`
 
 
 ## MongoDB Only

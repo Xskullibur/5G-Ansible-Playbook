@@ -9,8 +9,14 @@
         src: nfconfig/amf-{{ inventory_hostname }}.yaml
         dest: /etc/open5gs/nrf.yaml
         mode: '0644'
+      tags:
+        - upf
+        - upload
     - name: Restart Service
       ansible.builtin.shell: systemctl restart open5gs-nrfd
+      tags:
+        - upf
+        - restart
 
 - name: UDR
   hosts: bt_baf_5g_core_5g-udr
@@ -22,8 +28,14 @@
         src: nfconfig/udr-{{ inventory_hostname }}.yaml
         dest: /etc/open5gs/udr.yaml
         mode: '0644'
+      tags:
+        - udr
+        - upload
     - name: Restart Service
       ansible.builtin.shell: systemctl restart open5gs-udrd
+      tags:
+        - udr
+        - restart
 
 - name: UDM
   hosts: bt_baf_5g_core_5g-udm
@@ -35,8 +47,14 @@
         src: nfconfig/udm-{{ inventory_hostname }}.yaml
         dest: /etc/open5gs/udm.yaml
         mode: '0644'
+      tags:
+        - udm
+        - upload
     - name: Restart Service
       ansible.builtin.shell: systemctl restart open5gs-udmd
+      tags:
+        - udm
+        - restart
 
 - name: AMF
   hosts: bt_baf_5g_core_5g-amf
@@ -48,8 +66,14 @@
         src: nfconfig/amf-{{ inventory_hostname }}.yaml
         dest: /etc/open5gs/amf.yaml
         mode: '0644'
+      tags:
+        - amf
+        - upload
     - name: Restart Service
       ansible.builtin.shell: systemctl restart open5gs-amfd
+      tags:
+        - amf
+        - restart
 
 - name: AUSF
   hosts: bt_baf_5g_core_5g-ausf
@@ -61,8 +85,14 @@
         src: nfconfig/ausf-{{ inventory_hostname }}.yaml
         dest: /etc/open5gs/ausf.yaml
         mode: '0644'
+      tags:
+        - ausf
+        - upload
     - name: Restart Service
       ansible.builtin.shell: systemctl restart open5gs-ausfd
+      tags:
+        - ausf
+        - restart
 
 - name: SMF
   hosts: bt_baf_5g_core_5g-smf
@@ -74,8 +104,14 @@
         src: nfconfig/smf-{{ inventory_hostname }}.yaml
         dest: /etc/open5gs/smf.yaml
         mode: '0644'
+      tags:
+        - smf
+        - upload
     - name: Restart Service
       ansible.builtin.shell: systemctl restart open5gs-smfd
+      tags:
+        - smf
+        - restart
 
 - name: UPF-CORE
   hosts: bt_baf_5g_core_5g-upf-core
@@ -87,8 +123,14 @@
         src: nfconfig/upf-{{ inventory_hostname }}.yaml
         dest: /etc/open5gs/upf.yaml
         mode: '0644'
+      tags:
+        - upf-core
+        - upload
     - name: Restart Service
       ansible.builtin.shell: systemctl restart open5gs-upfd
+      tags:
+        - upf-core
+        - restart
 
 - name: UPF BAF
   hosts: bt_baf_5g_core_5g-upf-baf
@@ -100,8 +142,14 @@
         src: nfconfig/upf-{{ inventory_hostname }}.yaml
         dest: /etc/open5gs/upf.yaml
         mode: '0644'
+      tags:
+        - upf-baf
+        - upload
     - name: Restart Service
       ansible.builtin.shell: systemctl restart open5gs-upfd
+      tags:
+        - upf-baf
+        - restart
 
 - name: PCF
   hosts: bt_baf_5g_core_5g-pcf
@@ -113,8 +161,14 @@
         src: nfconfig/pcf-{{ inventory_hostname }}.yaml
         dest: /etc/open5gs/pcf.yaml
         mode: '0644'
+      tags:
+        - pcf
+        - upload
     - name: Restart Service
       ansible.builtin.shell: systemctl restart open5gs-pcfd
+      tags:
+        - pcf
+        - restart
 
 - name: BSF
   hosts: bt_baf_5g_core_5g-bsf
@@ -126,8 +180,14 @@
         src: nfconfig/bsf-{{ inventory_hostname }}.yaml
         dest: /etc/open5gs/bsf.yaml
         mode: '0644'
+      tags:
+        - bsf
+        - upload
     - name: Restart Service
       ansible.builtin.shell: systemctl restart open5gs-bsfd
+      tags:
+        - bsf
+        - restart
 
 - name: NSSF
   hosts: bt_baf_5g_core_5g-nssf
@@ -139,8 +199,14 @@
         src: nfconfig/nssf-{{ inventory_hostname }}.yaml
         dest: /etc/open5gs/nssf.yaml
         mode: '0644'
+      tags:
+        - nssf
+        - upload
     - name: Restart Service
       ansible.builtin.shell: systemctl restart open5gs-nssfd
+      tags:
+        - nssf
+        - restart
 
 - name: Upload gNB
   hosts: bt-baf-ran_5g-gnb-baf,bt-beg-ran_5g-gnb-beg
@@ -152,8 +218,14 @@
         src: gnbconfig/open5gs-gnb-{{ inventory_hostname }}.yaml
         dest: /opt/UERANSIM/config/open5gs-gnb.yaml
         mode: '0644'
+      tags:
+        - gnb
+        - upload
     - name: Restart Service
       ansible.builtin.shell: systemctl restart nr-gnb
+      tags:
+        - gnb
+        - restart
 
 - name: UE
   hosts: bt-baf-ran_5g-ue-baf_01,bt-baf-ran_5g-ue-baf_02,bt-baf-ran_5g-ue-baf_03
@@ -165,8 +237,14 @@
         src: ueconfig/open5gs-ue-{{ inventory_hostname }}.yaml
         dest: /opt/UERANSIM/config/open5gs-ue.yaml
         mode: '0644'
+      tags:
+        - ue
+        - upload
     - name: Restart Service
       ansible.builtin.shell: systemctl restart nr-ue
+      tags:
+        - ue
+        - restart
 
 - name: BAF UPF Bird
   hosts: bt-baf-dmz_5g-upf-baf
@@ -178,8 +256,14 @@
         src: birdconf/bird-{{ inventory_hostname }}.conf
         dest: /etc/bird/bird.conf
         mode: '0644'
+      tags:
+        - upf-baf-bird
+        - upload
     - name: Restart Service
       ansible.builtin.shell: ssystemctl restart bird.service
+      tags:
+        - upf-baf-bird
+        - restart
 
 - name: CORE UPF Bird
   hosts: bt-baf-5g-core_5g-upf-core
@@ -191,5 +275,11 @@
         src: birdconf/bird-{{ inventory_hostname }}.conf
         dest: /etc/bird/bird.conf
         mode: '0644'
+      tags:
+        - upf-core-bird
+        - upload
     - name: Restart Service
       ansible.builtin.shell: systemctl restart bird.service
+      tags:
+        - upf-core-bird
+        - restart
