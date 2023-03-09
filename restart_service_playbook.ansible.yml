@@ -6,6 +6,7 @@
   tasks:
     - name: Restart Service
       ansible.builtin.shell: systemctl restart mongod
+      ignore_errors: true
       tags:
         - db
 
@@ -15,7 +16,7 @@
   become: true
   tasks:
     - name: Restart Service
-      ansible.builtin.shell: systemctl restart open5gs-nrfdy
+      ansible.builtin.shell: systemctl restart open5gs-nrfd
       tags:
         - nrf
       
@@ -88,6 +89,14 @@
         - ue
     - name: Restart Bird Service
       ansible.builtin.shell: systemctl restart bird.service
+      ignore_errors: true
+      tags:
+        - nrf
+        - ausf
+        - ue
+    - name: Restart systemd-networkd Service
+      ansible.builtin.shell: systemctl restart systemd-networkd.service
+      ignore_errors: true
       tags:
         - nrf
         - ausf
@@ -105,7 +114,8 @@
         - ausf
         - ue
     - name: Restart Bird Service
-      ansible.builtin.shell: systemctl restart bird.service
+      ansible.builtin.shell: systemctl restart bird.service.
+      ignore_errors: true
       tags:
         - nrf
         - ausf
