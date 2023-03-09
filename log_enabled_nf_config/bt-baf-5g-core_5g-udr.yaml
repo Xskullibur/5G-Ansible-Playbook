@@ -20,7 +20,7 @@ logger:
    domain: core,sbi,udr,event,tlv,mem,sock
 #
 # logger:
-    file: /var/log/open5gs/udr.log
+   file: /var/log/open5gs/udr.log
 #
 # udr:
 #

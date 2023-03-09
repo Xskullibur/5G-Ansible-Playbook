@@ -13,12 +13,12 @@ logger:
 #    level: error
 #
 #  o Set OGS_LOG_DEBUG to mme/emm domain level
-   level: debug
+    level: debug
 #    domain: mme,emm
 #
 #  o Set OGS_LOG_TRACE to all domain level
 #    level: trace
-   domain: core,sbi,pcf,event,tlv,mem,sock
+    domain: core,sbi,pcf,event,tlv,mem,sock
 #
 # logger:
     file: /var/log/open5gs/pcf.log

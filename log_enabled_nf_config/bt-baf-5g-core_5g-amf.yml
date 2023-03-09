@@ -16,7 +16,7 @@ logger:
 #
 #  o Set OGS_LOG_TRACE to all domain level
 #    level: trace
-   domain: core,ngap,nas,gmm,sbi,amf,event,tlv,mem,sock
+    domain: core,ngap,nas,gmm,sbi,amf,event,tlv,mem,sock
 #
 # logger:
     file: /var/log/open5gs/amf.log
