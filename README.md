@@ -1,27 +1,39 @@
-# Download
-```
-ansible-playbook -i inventory.ini extract_playbook.ansible.yml
-```
-- Tags - \<network-functions\> | `gnb` | `ue` | `bird` | `upf-core` | `upf-baf`
+# 5G Ansible Playbook
+Ansible Playbook used to manipulate the hosts in a 5G network.
 
+## Requirements
+- Python 3.9
+- Ansible 7.3.0
 
-## MongoDB Only
-```
-ansible-playbook -i inventory.ini extract_playbook.ansible.yml --tags "db"
-```
-- Tags - `db` | `export` | `download` | `clear`
+## Setup
+A docker-compose file has been created to quickly setup the environment but it has not been tested yet.
 
-# Upload
-```
-ansible-playbook -i inventory.ini upload_playbook.ansible.yml
-```
+### Docker Environment Setup
+``` bash
+docker compose up -d # Create the image and container
 
-# Restart All Services
-```
-ansible-playbook -i inventory.ini restart_service_playbook.ansible.yml
+docker container ls -a # Identify the name of the container
+
+docker attach -i $CONTAINER_NAME # Attach to the container
 ```
 
-# TODO:
-Add to inventory
-- `bt-baf-ran_5g-gnb-baf ansible_host=100.97.6.40 os=ubuntu_22_04_desktop ansible_user=bt-user ansible_password=Admin1Admin1`
-- `bt-beg-ran_5g-gnb-beg ansible_host=100.96.6.10 os=ubuntu_22_04_desktop ansible_user=bt-user ansible_password=Admin1Admin1`
+### Virtual Environment Setup
+Refer to the [documentation](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) provided by Ansible for more information.
+
+## Usage
+```bash
+ansible-playbook -i $INVENTORY_DIR $PLAYBOOK_DIR
+```
+
+### Playbooks Available
+- download_conf.ansible.yml
+- restart_service.ansible.yml
+- upload_conf.ansible.yml
+
+### Tags
+Tags are also included in the different playbooks which can be called using:
+```bash
+ansible-playbook -i $INVENTORY_DIR $PLAYBOOK_DIR --tags $TAGS --skip-tags $SKIP_TAGS
+```
+
+> Refer to the respective playbooks to find the various tags
