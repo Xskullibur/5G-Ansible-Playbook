@@ -1,130 +1,164 @@
 ---
-- name: NRF
-  hosts: bt_baf_5g_core_5g-nrf
-  # remote_user: open5g
+- name: DB
+  hosts: bt-baf-5g-core_5g-db
   gather_facts: false
   become: true
-  become_method: sudo
+  tasks:
+    - name: Restart Service
+      ansible.builtin.shell: systemctl restart mongod
+      ignore_errors: true
+      tags:
+        - db
+
+- name: NRF
+  hosts: bt-baf-5g-core_5g-nrf
+  gather_facts: false
+  become: true
   tasks:
     - name: Restart Service
       ansible.builtin.shell: systemctl restart open5gs-nrfd
+      tags:
+        - nrf
       
 - name: UDR
-  hosts: bt_baf_5g_core_5g-udr
-  # remote_user: open5g
+  hosts: bt-baf-5g-core_5g-udr
   gather_facts: false
   become: true
-  become_method: sudo
   tasks:
     - name: Restart Service
       ansible.builtin.shell: systemctl restart open5gs-udrd
+      tags:
+        - nrf
+        - db
       
 - name: UDM
-  hosts: bt_baf_5g_core_5g-udm
-  # remote_user: open5g
+  hosts: bt-baf-5g-core_5g-udm
   gather_facts: false
   become: true
-  become_method: sudo
   tasks:
     - name: Restart Service
       ansible.builtin.shell: systemctl restart open5gs-udmd
-
-- name: AMF
-  hosts: bt_baf_5g_core_5g-amf
-  # remote_user: open5g
-  gather_facts: false
-  become: true
-  become_method: sudo
-  tasks:
-    - name: Restart Service
-      ansible.builtin.shell: systemctl restart open5gs-amfd
+      tags:
+        - nrf
 
 - name: AUSF
-  hosts: bt_baf_5g_core_5g-ausf
-  # remote_user: open5g
+  hosts: bt-baf-5g-core_5g-ausf
   gather_facts: false
   become: true
-  become_method: sudo
   tasks:
     - name: Restart Service
       ansible.builtin.shell: systemctl restart open5gs-ausfd
+      tags:
+        - nrf
+        - ausf
 
-- name: SMF
-  hosts: bt_baf_5g_core_5g-smf
-  # remote_user: open5g
+- name: AMF
+  hosts: bt-baf-5g-core_5g-amf
   gather_facts: false
   become: true
-  become_method: sudo
+  tasks:
+    - name: Restart Service
+      ansible.builtin.shell: systemctl restart open5gs-amfd
+      tags:
+        - nrf
+        - ausf
+        - ue
+
+- name: SMF
+  hosts: bt-baf-5g-core_5g-smf
+  gather_facts: false
+  become: true
   tasks:
     - name: Restart Service
       ansible.builtin.shell: systemctl restart open5gs-smfd
+      tags:
+        - nrf
+        - ausf
+        - ue
 
 - name: UPF-CORE
-  hosts: bt_baf_5g_core_5g-upf-core
-  # remote_user: open5g
+  hosts: bt-baf-5g-core_5g-upf-core
   gather_facts: false
   become: true
-  become_method: sudo
   tasks:
     - name: Restart Service
       ansible.builtin.shell: systemctl restart open5gs-upfd
+      tags:
+        - nrf
+        - ausf
+        - ue
+    - name: Restart Bird Service
+      ansible.builtin.shell: systemctl restart bird.service
+      ignore_errors: true
+      tags:
+        - nrf
+        - ausf
+        - ue
+    - name: Restart systemd-networkd Service
+      ansible.builtin.shell: systemctl restart systemd-networkd.service
+      ignore_errors: true
+      tags:
+        - nrf
+        - ausf
+        - ue
 
 - name: UPF BAF
-  hosts: bt_baf_5g_core_5g-upf-baf
-  # remote_user: open5g
+  hosts: bt-baf-5g-core_5g-upf-baf
   gather_facts: false
   become: true
-  become_method: sudo
   tasks:
     - name: Restart Service
       ansible.builtin.shell: systemctl restart open5gs-upfd
+      tags:
+        - nrf
+        - ausf
+        - ue
+    - name: Restart Bird Service
+      ansible.builtin.shell: systemctl restart bird.service.
+      ignore_errors: true
+      tags:
+        - nrf
+        - ausf
+        - ue
 
 - name: PCF
-  hosts: bt_baf_5g_core_5g-pcf
-  # remote_user: open5g
+  hosts: bt-baf-5g-core_5g-pcf
   gather_facts: false
   become: true
-  become_method: sudo
   tasks:
     - name: Restart Service
       ansible.builtin.shell: systemctl restart open5gs-pcfd
+      tags:
+        - nrf
+        - db
 
 - name: BSF
-  hosts: bt_baf_5g_core_5g-bsf
-  # remote_user: open5g
+  hosts: bt-baf-5g-core_5g-bsf
   gather_facts: false
   become: true
-  become_method: sudo
   tasks:
     - name: Restart Service
       ansible.builtin.shell: systemctl restart open5gs-bsfd
+      tags:
+        - nrf
 
 - name: NSSF
-  hosts: bt_baf_5g_core_5g-nssf
-  # remote_user: open5g
+  hosts: bt-baf-5g-core_5g-nssf
   gather_facts: false
   become: true
-  become_method: sudo
   tasks:
     - name: Restart Service
       ansible.builtin.shell: systemctl restart open5gs-nssfd
+      tags:
+        - nrf
 
-- name: Restart gNB Service
-  hosts: bt-baf-ran_5g-gnb-baf,bt-beg-ran_5g-gnb-beg
-  # remote_user: open5g
+- name: WebUI
+  hosts: bt-baf-5g-core_5g-webui
   gather_facts: false
   become: true
-  become_method: sudo
   tasks:
     - name: Restart Service
-      ansible.builtin.shell: systemctl restart nr-gnb
-
-- name: Restart UE Service
-  hosts: bt-baf-ran_5g-ue-baf_01,bt-baf-ran_5g-ue-baf_02,bt-baf-ran_5g-ue-baf_03,bt-beg-ran_5g-ue-beg_01,bt-beg-ran_5g-ue-beg_02,bt-beg-ran_5g-ue-beg_03
-  # remote_user: open5g
-  gather_facts: false
-  become: true
-  become_method: sudo
-  tasks:
-    - name: Restart Service
-      ansible.builtin.shell: systemctl restart nr-ue
+      ansible.builtin.shell: systemctl start open5gs-webui
+      tags:
+        - nrf
+        - db
